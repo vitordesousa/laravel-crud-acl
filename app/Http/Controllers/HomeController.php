@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
-use Illuminate\Auth\Access\Gate;
-
 class HomeController extends Controller
 {
 	/**
@@ -28,14 +26,5 @@ class HomeController extends Controller
 	{
 		$items = Post::all();
 		return view('home', compact('items'));
-	}
-
-	public function edit(Post $post){
-
-		if( !Gate::allows('update-post', $post)){
-			abort(403);
-		}
-
-		return view('posts.edit', compact('post'));
 	}
 }
