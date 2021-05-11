@@ -45,14 +45,14 @@ class User extends Authenticatable
 
 
 	public function hasPermission($permission){
-		return $this->hasAnyRoles($permission->roles);
+		return $this->hasAnyRoles($permission->role);
 	}
 
 	public function hasAnyRoles($roles){
 		if( is_array($roles) || is_object($roles)){
-			return !! $roles->intersect($this->roles)->count();
+			return !! $roles->intersect($this->role)->count();
 		} else {
-			return $this->roles->contains('name', $roles);
+			return $this->role->contains('name', $roles);
 		}
 	}
 
