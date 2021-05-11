@@ -26,7 +26,7 @@ class PostController extends Controller
 	public function index()
 	{
 		$items = Post::all();
-		return view('home', compact('items'));
+		return view('posts.index', compact('items'));
 	}
 
 	/**
