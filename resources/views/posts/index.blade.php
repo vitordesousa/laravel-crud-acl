@@ -3,7 +3,7 @@
 @section('content')
 	<div class="container">
 		@forelse ($posts as $post)
-			@can('edit-post', $post)
+			@can('view_post', $post)
 				<h1>{{$post->title}}</h1>
 				<p>{{$post->description}}</p>
 				<p><strong>Autor: </strong> {{$post->user->name}}</p>

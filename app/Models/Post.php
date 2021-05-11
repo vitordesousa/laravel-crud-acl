@@ -15,10 +15,11 @@ class Post extends Model
 
 
 
-	// relationships
+	/* + relationships */
 	public function user()
 	{
 		return $this->belongsTo(User::class);
 	}
+	/* / relationships */
 	
 }
