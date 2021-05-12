@@ -22,6 +22,16 @@ Route::get('/', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::resource('posts', App\Http\Controllers\PostController::class);
+Route::resources([
+	'posts' => App\Http\Controllers\PostController::class,
+	'roles' => App\Http\Controllers\PostController::class,
+	'permissions' => App\Http\Controllers\PostController::class,
+	'users' => App\Http\Controllers\UserController::class,
+]);
+
+/* Route::resource('posts', App\Http\Controllers\PostController::class);
+Route::resource('roles', App\Http\Controllers\RoleController::class);
+Route::resource('roles', App\Http\Controllers\RoleController::class);
+Route::resource('permissions', App\Http\Controllers\PermissionController::class); */
 
 Auth::routes();
