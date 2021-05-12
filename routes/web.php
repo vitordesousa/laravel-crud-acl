@@ -24,8 +24,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resources([
 	'posts' => App\Http\Controllers\PostController::class,
-	'roles' => App\Http\Controllers\PostController::class,
-	'permissions' => App\Http\Controllers\PostController::class,
+	'roles' => App\Http\Controllers\RoleController::class,
+	'permissions' => App\Http\Controllers\PermissionController::class,
 	'users' => App\Http\Controllers\UserController::class,
 ]);
 
