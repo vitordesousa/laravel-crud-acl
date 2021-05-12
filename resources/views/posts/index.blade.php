@@ -2,6 +2,10 @@
 
 @section('content')
 	<div class="container">
+		<div class="row">
+			<div class="col-lg-7 p-3">Posts</div>
+			<div class="col-lg-5 p-3"><a href="{{route('posts.create')}}" class="btn btn-success btn-sm float-right">Add</a> </div>
+		</div>
 		<table class="table table-bordered table-hover">
 			<tr>
 				<th>ID</th>
