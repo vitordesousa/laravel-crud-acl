@@ -6,6 +6,7 @@
 			<tr>
 				<th>ID</th>
 				<th>Name</th>
+				<th>Role</th>
 				<th>Email</th>
 				<th>Created At</th>
 				<th>Actions</th>
@@ -15,6 +16,14 @@
 				<tr>
 					<td>{{$user->id}}</td>
 					<td>{{$user->name}}</td>
+					<td>
+						@forelse ($user->role as $role)
+							{{$role->name}},
+						@empty
+							<strong>This user don't have role</strong>
+						@endforelse
+						
+					</td>
 					<td>{{$user->email}}</td>
 					<td>{{$user->created_at}}</td>
 					<td>
