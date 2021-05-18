@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostStoreRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -25,7 +26,6 @@ class PostController extends Controller
 	 */
 	public function index()
 	{
-		//$posts = Post::all();
 		$posts = Post::paginate(10);
 		return view('posts.index', compact('posts'));
 	}
@@ -37,18 +37,19 @@ class PostController extends Controller
 	 */
 	public function create()
 	{
-		//
+		return view('posts.create');
 	}
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request  $request
+	 * @param  App\Http\Requests\PostStoreRequest  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(Request $request)
+	public function store(PostStoreRequest $request)
 	{
-		//
+		Post::create(['title' => $request->title, 'description' => $request->description, 'user_id' => auth()->user()->id ]);
+		return redirect()->route('posts.index')->with('success', 'Post created successfully!');
 	}
 
 	/**
@@ -83,7 +84,7 @@ class PostController extends Controller
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request  $request
+	 * @param  App\Http\Requests\PostStoreRequest $request
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
