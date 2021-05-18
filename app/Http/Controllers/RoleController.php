@@ -32,7 +32,7 @@ class RoleController extends Controller
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @param  \Illuminate\Http\RoleStoreRequest  $request
+	 * @param  App\Http\Requests\RoleStoreRequest  $request
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(RoleStoreRequest $request)
@@ -55,24 +55,24 @@ class RoleController extends Controller
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  mixin  $role
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit($id)
+	public function edit(Role $role)
 	{
-		//
+		return view('roles.edit', compact('role'));
 	}
-
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  int  $id
+	 * @param  App\Http\Requests\RoleStoreRequest  $request
+	 * @param  mixin  $role
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id)
+	public function update(RoleStoreRequest $request, Role $role)
 	{
-		//
+		$role->update($request->only('name', 'label'));
+		return redirect()->route('roles.index')->with('success', 'Role updated successfully!');
 	}
 
 	/**
