@@ -70,4 +70,13 @@ class User extends Authenticatable
 
 	/* / relationships */
 
+
+
+
+	
+	public function setPasswordAttribute($value)
+	{
+		$this->attributes['password'] = bcrypt($value);
+	}
+
 }

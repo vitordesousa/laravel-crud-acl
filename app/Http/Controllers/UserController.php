@@ -6,8 +6,9 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\RoleUser;
 use Illuminate\Http\Request;
-use App\Http\Requests\UserUpdateRequest;
 use PhpParser\Node\Stmt\TryCatch;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends Controller
 {
@@ -30,7 +31,8 @@ class UserController extends Controller
 	 */
 	public function create()
 	{
-		//
+		$roles = Role::all();
+		return view('users.create', compact('roles'));
 	}
 
 	/**
@@ -39,9 +41,11 @@ class UserController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(Request $request)
+	public function store(UserStoreRequest $request)
 	{
-		//
+		$user = User::create($request->only('name', 'email', 'password'));
+		self::setUserRoles($request, $user, 'store');
+		return redirect()->route('users.index')->with('success', 'User created successfully!');
 	}
 
 	/**
@@ -77,7 +81,7 @@ class UserController extends Controller
 	public function update(UserUpdateRequest $request, User $user)
 	{
 		// remove old roles and add new
-		self::updateUserRoles($request, $user);
+		self::setUserRoles($request, $user, 'update');
 
 		$user->update($request->only('name', 'email'));
 
@@ -87,12 +91,12 @@ class UserController extends Controller
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int  $id
+	 * @param  minx  $user
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy(User $user)
 	{
-		//
+		return $user->delete();
 	}
 
 
@@ -104,9 +108,13 @@ class UserController extends Controller
 	 * @param mixin $user
 	 * @return void
 	 */
-	public static function updateUserRoles($request, $user){
+	public static function setUserRoles($request, $user, $method = null){
 		try {
-			$user->userrole()->delete(); // first delete old values
+			
+			if($method === 'update'){
+				$user->userrole()->delete(); // first delete old values
+			}
+
 			try {
 				foreach ($request->role as $value) {
 					RoleUser::create(['role_id' => (int)$value, 'user_id' => $user->id]);
