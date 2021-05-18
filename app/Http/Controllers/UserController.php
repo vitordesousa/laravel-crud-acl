@@ -6,7 +6,6 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\RoleUser;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\TryCatch;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 
@@ -19,7 +18,6 @@ class UserController extends Controller
 	 */
 	public function index()
 	{
-		//$posts = Post::all();
 		$users = User::paginate(10);
 		return view('users.index', compact('users'));
 	}
@@ -38,8 +36,8 @@ class UserController extends Controller
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
+	 * @param  App\Http\Requests\UserStoreRequest $request
+	 * @return App\Http\Requests\UserStoreRequest
 	 */
 	public function store(UserStoreRequest $request)
 	{
@@ -62,7 +60,7 @@ class UserController extends Controller
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param  int  $user
+	 * @param  mixin  $user
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit(User $user)
@@ -74,9 +72,9 @@ class UserController extends Controller
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
+	 * @param  App\Http\Requests\UserUpdateRequest  $request
+	 * @param  mixin  $user
+	 * @return App\Http\Requests\UserUpdateRequest
 	 */
 	public function update(UserUpdateRequest $request, User $user)
 	{
@@ -84,14 +82,13 @@ class UserController extends Controller
 		self::setUserRoles($request, $user, 'update');
 
 		$user->update($request->only('name', 'email'));
-
 		return redirect()->route('users.index')->with('success', 'User updated successfully!');
 	}
 
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  minx  $user
+	 * @param  mixin  $user
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy(User $user)
