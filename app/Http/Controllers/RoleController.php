@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
+use App\Http\Requests\RoleStoreRequest;
 
 class RoleController extends Controller
 {
@@ -25,18 +26,19 @@ class RoleController extends Controller
 	 */
 	public function create()
 	{
-		//
+		return view('roles.create');
 	}
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \Illuminate\Http\RoleStoreRequest  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(Request $request)
+	public function store(RoleStoreRequest $request)
 	{
-		//
+		Role::create($request->only('name', 'label'));
+		return redirect()->route('roles.index')->with('success', 'Role created successfully!');
 	}
 
 	/**
