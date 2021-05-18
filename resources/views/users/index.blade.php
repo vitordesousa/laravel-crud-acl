@@ -30,8 +30,8 @@
 					<td>{{$user->email}}</td>
 					<td>{{$user->created_at}}</td>
 					<td>
-						<a href="{{route('posts.edit', $user->id)}}" class="btn btn-warning btn-sm">Edit</a> 
-						<a href="{{route('posts.destroy', $user->id)}}" class="btn btn-danger btn-sm">Delete</a> 
+						<a href="{{route('users.edit', $user->id)}}" class="btn btn-warning btn-sm">Edit</a> 
+						<a href="{{route('users.destroy', $user->id)}}" class="btn btn-danger btn-sm">Delete</a> 
 					</td>
 				</tr>
 			@endcan
