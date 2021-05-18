@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Requests\RoleStoreRequest;
+use App\Models\Permission;
+use App\Models\RolePermission;
 
 class RoleController extends Controller
 {
@@ -26,7 +28,9 @@ class RoleController extends Controller
 	 */
 	public function create()
 	{
-		return view('roles.create');
+		$collection  = collect(Permission::all());
+		$permissions = $collection->groupBy('route');
+		return view('roles.create', compact('permissions'));
 	}
 
 	/**
@@ -37,7 +41,8 @@ class RoleController extends Controller
 	 */
 	public function store(RoleStoreRequest $request)
 	{
-		Role::create($request->only('name', 'label'));
+		$role = Role::create($request->only('name', 'label'));
+		self::setPermissionsToRole($role, $request->permission, 'store');
 		return redirect()->route('roles.index')->with('success', 'Role created successfully!');
 	}
 
@@ -89,5 +94,33 @@ class RoleController extends Controller
 		} catch (\Throwable $th) {
 			abort(400, $th);
 		}
+	}
+
+
+
+
+
+	/**
+	 * Add Roles to user
+	 *
+	 * @param mixin $role
+	 * @param array $permissions
+	 * @param string $method
+	 * @return void
+	 */
+	public static function setPermissionsToRole($role, $permissions, $method = null){
+		try {
+			if($method === 'update'){
+				$role->rolepermission()->delete(); // first delete old values
+			}
+		} catch (\Throwable $th) {
+			abort(400, 'Error while change old values');
+		}
+
+		foreach ($permissions as $value) {
+			RolePermission::create(['role_id' => $role->id, 'permission_id' => (int)$value]);
+		}
+
+		return;
 	}
 }

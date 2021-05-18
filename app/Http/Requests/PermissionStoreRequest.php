@@ -26,6 +26,7 @@ class PermissionStoreRequest extends FormRequest
 		return [
 			'name'						=>	['required', 'max:255'],
 			'label'						=>	['required', 'max:255'],
+			'route'						=>	['required', 'min:1', 'array'],
 		];
 	}
 }
