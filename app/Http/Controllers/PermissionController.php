@@ -55,12 +55,12 @@ class PermissionController extends Controller
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  mixin  $permission
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit($id)
+	public function edit(Permission $permission)
 	{
-		//
+		return view('permissions.edit', compact('permission'));
 	}
 
 	/**
@@ -70,9 +70,10 @@ class PermissionController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id)
+	public function update(PermissionStoreRequest $request, Permission $permission)
 	{
-		//
+		$permission->update($request->only('name', 'label'));
+		return redirect()->route('permissions.index')->with('success', 'Permission updated successfully!');
 	}
 
 	/**
@@ -81,8 +82,13 @@ class PermissionController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy(Permission $permission)
 	{
-		//
+		try {
+			$permission->delete();
+			return redirect()->route('permissions.index')->with('success', 'Permission deleted successfully!');
+		} catch (\Throwable $th) {
+			abort(400, $th);
+		}
 	}
 }

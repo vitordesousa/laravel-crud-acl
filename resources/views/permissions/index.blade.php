@@ -36,7 +36,7 @@
 						<td>
 							<a href="{{route('permissions.edit', $permission->id)}}" class="btn btn-warning btn-sm">Edit</a> 
 							<a href="{{route('permissions.destroy', $permission->id)}}" class="btn btn-danger btn-sm" onclick="event.preventDefault(); document.getElementById('delete-form-{{$permission->id}}').submit();">Delete</a>
-							<form id="delete-form-{{$permission->id}}" action="{{ route('roles.destroy', $permission->id) }}" method="POST" class="d-none">
+							<form id="delete-form-{{$permission->id}}" action="{{ route('permissions.destroy', $permission->id) }}" method="POST" class="d-none">
 								@csrf
 								@method('DELETE')
 							</form>
@@ -45,7 +45,7 @@
 				@endcan
 			@empty
 				<tr>
-					<td colspan="5"><strong>Nothing to show</strong></td>
+					<td colspan="6"><strong>Nothing to show</strong></td>
 				</tr>
 			@endforelse
 		</table>
