@@ -2,6 +2,9 @@
 
 @section('content')
 	<div class="container">
+		
+		@include('_components.alerts')
+
 		<div class="row">
 			<div class="col-lg-7 p-3">Posts</div>
 			<div class="col-lg-5 p-3"><a href="{{route('users.create')}}" class="btn btn-success btn-sm float-right">Add</a> </div>
