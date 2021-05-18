@@ -30,7 +30,11 @@
 					<td>{{$role->created_at}}</td>
 					<td>
 						<a href="{{route('roles.edit', $role->id)}}" class="btn btn-warning btn-sm">Edit</a> 
-						<a href="{{route('roles.destroy', $role->id)}}" class="btn btn-danger btn-sm">Delete</a> 
+						<a href="{{route('roles.destroy', $role->id)}}" class="btn btn-danger btn-sm" onclick="event.preventDefault(); document.getElementById('delete-form-{{$role->id}}').submit();">Delete</a>
+						<form id="delete-form-{{$role->id}}" action="{{ route('roles.destroy', $role->id) }}" method="POST" class="d-none">
+							@csrf
+							@method('DELETE')
+						</form>
 					</td>
 				</tr>
 			@endcan

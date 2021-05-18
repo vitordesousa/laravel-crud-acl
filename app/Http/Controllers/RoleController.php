@@ -78,11 +78,16 @@ class RoleController extends Controller
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int  $id
+	 * @param  mixin  $role
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy(Role $role)
 	{
-		//
+		try {
+			$role->delete();
+			return redirect()->route('roles.index')->with('success', 'Role deleted successfully!');
+		} catch (\Throwable $th) {
+			abort(400, $th);
+		}
 	}
 }
