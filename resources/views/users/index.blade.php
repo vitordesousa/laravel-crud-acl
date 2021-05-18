@@ -31,7 +31,11 @@
 					<td>{{$user->created_at}}</td>
 					<td>
 						<a href="{{route('users.edit', $user->id)}}" class="btn btn-warning btn-sm">Edit</a> 
-						<a href="{{route('users.destroy', $user->id)}}" class="btn btn-danger btn-sm">Delete</a> 
+						<a href="{{route('users.destroy', $user->id)}}" class="btn btn-danger btn-sm" onclick="event.preventDefault(); document.getElementById('delete-form-{{$user->id}}').submit();">Delete</a>
+						<form id="delete-form-{{$user->id}}" action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-none">
+							@csrf
+							@method('DELETE')
+						</form>
 					</td>
 				</tr>
 			@endcan
