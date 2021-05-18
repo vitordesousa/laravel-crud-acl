@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="container">
-		
+
 		@include('_components.alerts')
 
 		<div class="row">
@@ -29,7 +29,6 @@
 					<td>{{$role->user->count()}}</td>
 					<td>{{$role->created_at}}</td>
 					<td>
-						<a href="{{route('roles.show', $role->id)}}" class="btn btn-info btn-sm">Show</a> 
 						<a href="{{route('roles.edit', $role->id)}}" class="btn btn-warning btn-sm">Edit</a> 
 						<a href="{{route('roles.destroy', $role->id)}}" class="btn btn-danger btn-sm">Delete</a> 
 					</td>
