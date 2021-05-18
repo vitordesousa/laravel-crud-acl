@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Permission;
 use Illuminate\Http\Request;
+use App\Http\Requests\PermissionStoreRequest;
 
 class PermissionController extends Controller
 {
@@ -14,8 +15,6 @@ class PermissionController extends Controller
 	 */
 	public function index()
 	{
-		//
-		//$posts = Post::all();
 		$permissions = Permission::paginate(10);
 		return view('permissions.index', compact('permissions'));
 	}
@@ -27,18 +26,19 @@ class PermissionController extends Controller
 	 */
 	public function create()
 	{
-		//
+		return view('permissions.create');
 	}
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request  $request
+	 * @param  App\Http\Requests\PermissionStoreRequest  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(Request $request)
+	public function store(PermissionStoreRequest $request)
 	{
-		//
+		Permission::create($request->only('name', 'label'));
+		return redirect()->route('permissions.index')->with('success', 'Permission created successfully!');
 	}
 
 	/**
