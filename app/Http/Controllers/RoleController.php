@@ -65,7 +65,9 @@ class RoleController extends Controller
 	 */
 	public function edit(Role $role)
 	{
-		return view('roles.edit', compact('role'));
+		$collection  = collect(Permission::all());
+		$permissions = $collection->groupBy('route');
+		return view('roles.edit', compact('role', 'permissions'));
 	}
 	/**
 	 * Update the specified resource in storage.
@@ -77,6 +79,7 @@ class RoleController extends Controller
 	public function update(RoleStoreRequest $request, Role $role)
 	{
 		$role->update($request->only('name', 'label'));
+		self::setPermissionsToRole($role, $request->permission, 'update');
 		return redirect()->route('roles.index')->with('success', 'Role updated successfully!');
 	}
 
