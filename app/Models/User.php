@@ -63,6 +63,11 @@ class User extends Authenticatable
 	public function role()	{
 		return $this->belongsToMany(\App\Models\Role::class);
 	}
+
+	public function userrole()	{
+		return $this->HasMany(\App\Models\RoleUser::class);
+	}
+
 	/* / relationships */
 
 }
