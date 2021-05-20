@@ -9,9 +9,6 @@ class RolePermission extends Model
 {
 	use HasFactory;
 
-	//TODO: REMOVER ESSA LINHA ABAIXO E CORRIGIR A TABELA PARA ROLE_PERMISSIONS
-	protected $table = 'permission_role';
-
 	/**
 	 * The attributes that are mass assignable.
 	 *

@@ -9,9 +9,6 @@ class RoleUser extends Model
 {
 	use HasFactory;
 
-	//TODO: REMOVER ESSA LINHA ABAIXO E CORRIGIR A TABELA PARA PLURAL
-	protected $table = 'role_user';
-
 	/**
 	 * The attributes that are mass assignable.
 	 *
