@@ -49,8 +49,8 @@
 								@endcan
 								@can('roles_index')
 								<a class="dropdown-item" href="{{ route('roles.index') }}">Roles</a>
-								@can('permissions_index')
 								@endcan
+								@can('permissions_index')
 								<a class="dropdown-item" href="{{ route('permissions.index') }}">Permissions</a>
 								@endcan
 							</div>
