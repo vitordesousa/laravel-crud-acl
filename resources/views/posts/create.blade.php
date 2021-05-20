@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+	@can('posts_create')
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -50,4 +51,7 @@
 			</div>
 		</div>
 	</div>
+	@else
+		@include('_components.permission_denied')
+	@endcan
 @endsection
