@@ -3,13 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
-use Illuminate\Http\Request;
-use App\Http\Requests\RoleStoreRequest;
 use App\Models\Permission;
+use Illuminate\Http\Request;
 use App\Models\RolePermission;
+use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\RoleStoreRequest;
 
 class RoleController extends Controller
 {
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
+
+	/**
+	 * detetermine if user can pass or no
+	 *
+	 * @param string $gate
+	 * @param mixins $model
+	 * @return void
+	 */
+	public static function deny($gate, $model = null){
+		if( !Gate::allows($gate, $model)){
+			abort(401);
+		}
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -17,6 +42,8 @@ class RoleController extends Controller
 	 */
 	public function index()
 	{
+		self::deny('roles_index');
+
 		$roles = Role::paginate(10);
 		return view('roles.index', compact('roles'));
 	}
@@ -28,6 +55,8 @@ class RoleController extends Controller
 	 */
 	public function create()
 	{
+		self::deny('roles_create');
+
 		$collection  = collect(Permission::all());
 		$permissions = $collection->groupBy('route');
 		return view('roles.create', compact('permissions'));
@@ -41,6 +70,8 @@ class RoleController extends Controller
 	 */
 	public function store(RoleStoreRequest $request)
 	{
+		self::deny('roles_create');
+
 		$role = Role::create($request->only('name', 'label'));
 		self::setPermissionsToRole($role, $request->permission, 'store');
 		return redirect()->route('roles.index')->with('success', 'Role created successfully!');
@@ -65,6 +96,8 @@ class RoleController extends Controller
 	 */
 	public function edit(Role $role)
 	{
+		self::deny('roles_edit');
+
 		$collection  = collect(Permission::all());
 		$permissions = $collection->groupBy('route');
 		return view('roles.edit', compact('role', 'permissions'));
@@ -78,6 +111,8 @@ class RoleController extends Controller
 	 */
 	public function update(RoleStoreRequest $request, Role $role)
 	{
+		self::deny('roles_edit');
+
 		$role->update($request->only('name', 'label'));
 		self::setPermissionsToRole($role, $request->permission, 'update');
 		return redirect()->route('roles.index')->with('success', 'Role updated successfully!');
@@ -91,6 +126,8 @@ class RoleController extends Controller
 	 */
 	public function destroy(Role $role)
 	{
+		self::deny('roles_delete');
+
 		try {
 			$role->delete();
 			return redirect()->route('roles.index')->with('success', 'Role deleted successfully!');

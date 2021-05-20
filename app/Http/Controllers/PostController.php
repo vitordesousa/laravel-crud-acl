@@ -19,6 +19,21 @@ class PostController extends Controller
 		$this->middleware('auth');
 	}
 
+
+	/**
+	 * detetermine if user can pass or no
+	 *
+	 * @param string $gate
+	 * @param mixins $model
+	 * @return void
+	 */
+	public static function deny($gate, $model = null){
+		if( !Gate::allows($gate, $model)){
+			abort(401);
+		}
+	}
+
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -26,6 +41,8 @@ class PostController extends Controller
 	 */
 	public function index()
 	{
+		self::deny('posts_index');
+
 		$posts = Post::paginate(10);
 		return view('posts.index', compact('posts'));
 	}
@@ -37,6 +54,8 @@ class PostController extends Controller
 	 */
 	public function create()
 	{
+		self::deny('posts_create');
+
 		return view('posts.create');
 	}
 
@@ -48,6 +67,8 @@ class PostController extends Controller
 	 */
 	public function store(PostStoreRequest $request)
 	{
+		self::deny('posts_create');
+
 		Post::create(['title' => $request->title, 'description' => $request->description, 'user_id' => auth()->user()->id ]);
 		return redirect()->route('posts.index')->with('success', 'Post created successfully!');
 	}
@@ -60,6 +81,8 @@ class PostController extends Controller
 	 */
 	public function show(Post $post)
 	{
+		self::deny('posts_show');
+
 		return view('posts.show', compact('post'));
 	}
 
@@ -71,13 +94,10 @@ class PostController extends Controller
 	 */
 	public function edit($id)
 	{
-
 		$post = Post::findOrfail($id);
 		
-		if( !Gate::allows('edit-post', $post)){
-			abort(403);
-		}
-
+		self::deny('posts_edit', $post);
+		
 		return view('posts.edit', compact('post'));
 	}
 
@@ -91,6 +111,9 @@ class PostController extends Controller
 	public function update(Request $request, Post $post)
 	{
 		$post->update($request->only('title', 'description'));
+		
+		self::deny('posts_edit', $post);
+
 		return redirect()->route('posts.index')->with('success', 'Post updated successfully!');
 	}
 
@@ -102,6 +125,8 @@ class PostController extends Controller
 	 */
 	public function destroy(Post $post)
 	{
+		self::deny('posts_delete');
+
 		try {
 			$post->delete();
 			return redirect()->route('posts.index')->with('success', 'Post deleted successfully!');
