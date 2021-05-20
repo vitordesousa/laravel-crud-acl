@@ -53,7 +53,21 @@ class RoleUserSeed extends Seeder
 				'role_id'		=>	5,
 				'created_at'	=>	$now,
 			 	'updated_at' 	=>	$now
-			]
+			],
+			[
+				'id'			=>	6,
+				'user_id'		=>	6,
+				'role_id'		=>	3,
+				'created_at'	=>	$now,
+			 	'updated_at' 	=>	$now
+			],
+			[
+				'id'			=>	7,
+				'user_id'		=>	7,
+				'role_id'		=>	3,
+				'created_at'	=>	$now,
+			 	'updated_at' 	=>	$now
+			],
 		];
 		
 		RoleUser::insert($data);

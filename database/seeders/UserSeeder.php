@@ -58,7 +58,23 @@ class UserSeeder extends Seeder
 				'password'		=>	bcrypt('password'),
 				'created_at'	=>	$now,
 			 	'updated_at' 	=>	$now
-			]
+			],
+			[
+				'id'			=>	6,
+				'name'			=>	'Editor 2',
+				'email'			=>	'editor2@example.com',
+				'password'		=>	bcrypt('password'),
+				'created_at'	=>	$now,
+			 	'updated_at' 	=>	$now
+			],
+			[
+				'id'			=>	7,
+				'name'			=>	'Editor 3',
+				'email'			=>	'editor3@example.com',
+				'password'		=>	bcrypt('password'),
+				'created_at'	=>	$now,
+			 	'updated_at' 	=>	$now
+			],
 		];
 		
 		User::insert($data);
