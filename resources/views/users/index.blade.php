@@ -1,25 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="container">
-		
-		@include('_components.alerts')
+	@can('users_index')
+		<div class="container">			
+			@include('_components.alerts')
 
-		<div class="row">
-			<div class="col-lg-7 p-3">Posts</div>
-			<div class="col-lg-5 p-3"><a href="{{route('users.create')}}" class="btn btn-success btn-sm float-right">Add</a> </div>
-		</div>
-		<table class="table table-bordered table-hover">
-			<tr>
-				<th>ID</th>
-				<th>Name</th>
-				<th>Role(s)</th>
-				<th>Email</th>
-				<th>Created At</th>
-				<th>Actions</th>
-			</tr>
-		@forelse ($users as $user)
-			@can('view_post', $user)
+			<div class="row">
+				<div class="col-lg-7 p-3">Posts</div>
+				<div class="col-lg-5 p-3"><a href="{{route('users.create')}}" class="btn btn-success btn-sm float-right">Add</a> </div>
+			</div>
+			<table class="table table-bordered table-hover">
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Role(s)</th>
+					<th>Email</th>
+					<th>Created At</th>
+					<th>Actions</th>
+				</tr>
+			@forelse ($users as $user)
 				<tr>
 					<td>{{$user->id}}</td>
 					<td>{{$user->name}}</td>
@@ -41,14 +40,16 @@
 						</form>
 					</td>
 				</tr>
-			@endcan
-		@empty
-			<tr>
-				<td colspan="5"><strong>Nothing to show</strong></td>
-			</tr>
-		@endforelse		
-		</table>
+			@empty
+				<tr>
+					<td colspan="5"><strong>Nothing to show</strong></td>
+				</tr>
+			@endforelse		
+			</table>
 
-		{{$users->links()}}
-	</div>
+			{{$users->links()}}
+		</div>
+	@else
+		@include('_components.permission_denied')
+	@endcan
 @endsection

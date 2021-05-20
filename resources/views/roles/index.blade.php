@@ -1,26 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="container">
+	@can('roles_index')
+		<div class="container">
+			@include('_components.alerts')
 
-		@include('_components.alerts')
-
-		<div class="row">
-			<div class="col-lg-7 p-3">Roles</div>
-			<div class="col-lg-5 p-3"><a href="{{route('roles.create')}}" class="btn btn-success btn-sm float-right">Add</a> </div>
-		</div>
-		<table class="table table-bordered table-hover">
-			<tr>
-				<th>ID</th>
-				<th>Name</th>
-				<th>Label</th>
-				<th>Permissions</th>
-				<th>Users</th>
-				<th>Created At</th>
-				<th>Actions</th>
-			</tr>
-		@forelse ($roles as $role)
-			@can('view_post', $role)
+			<div class="row">
+				<div class="col-lg-7 p-3">Roles</div>
+				<div class="col-lg-5 p-3"><a href="{{route('roles.create')}}" class="btn btn-success btn-sm float-right">Add</a> </div>
+			</div>
+			<table class="table table-bordered table-hover">
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Label</th>
+					<th>Permissions</th>
+					<th>Users</th>
+					<th>Created At</th>
+					<th>Actions</th>
+				</tr>
+			@forelse ($roles as $role)
 				<tr>
 					<td>{{$role->id}}</td>
 					<td>{{$role->name}}</td>
@@ -37,14 +36,16 @@
 						</form>
 					</td>
 				</tr>
-			@endcan
-		@empty
-			<tr>
-				<td colspan="5"><strong>Nothing to show</strong></td>
-			</tr>
-		@endforelse		
-		</table>
+			@empty
+				<tr>
+					<td colspan="5"><strong>Nothing to show</strong></td>
+				</tr>
+			@endforelse		
+			</table>
 
-		{{$roles->links()}}
-	</div>
+			{{$roles->links()}}
+		</div>
+	@else
+		@include('_components.permission_denied')
+	@endcan
 @endsection
