@@ -33,18 +33,26 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<!-- Left Side Of Navbar -->
 					<ul class="navbar-nav mr-auto">
+						@can('posts_index')
 						<li class="nav-item active">
 							<a class="nav-link" href="{{route('posts.index') }}">Posts</a>
 						</li>
+						@endcan
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Users Managment
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="{{ route('users.index') }}">Users</a>
+								@can('users_index')
+								<a class="dropdown-item" href="{{ route('users.index') }}">Users</a>									
 								<div class="dropdown-divider"></div>
+								@endcan
+								@can('roles_index')
 								<a class="dropdown-item" href="{{ route('roles.index') }}">Roles</a>
+								@can('permissions_index')
+								@endcan
 								<a class="dropdown-item" href="{{ route('permissions.index') }}">Permissions</a>
+								@endcan
 							</div>
 						</li>
 					</ul>
