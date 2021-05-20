@@ -55,12 +55,12 @@ class PostController extends Controller
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  mixin  $post
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show($id)
+	public function show(Post $post)
 	{
-		//
+		return view('posts.show', compact('post'));
 	}
 
 	/**
@@ -85,22 +85,28 @@ class PostController extends Controller
 	 * Update the specified resource in storage.
 	 *
 	 * @param  App\Http\Requests\PostStoreRequest $request
-	 * @param  int  $id
+	 * @param  mixin  $post
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id)
+	public function update(Request $request, Post $post)
 	{
-		//
+		$post->update($request->only('title', 'description'));
+		return redirect()->route('posts.index')->with('success', 'Post updated successfully!');
 	}
 
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int  $id
+	 * @param  mixin  $post
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy(Post $post)
 	{
-		//
+		try {
+			$post->delete();
+			return redirect()->route('posts.index')->with('success', 'Post deleted successfully!');
+		} catch (\Throwable $th) {
+			abort(400, $th);
+		}
 	}
 }
