@@ -152,7 +152,7 @@ class UserController extends Controller
 		try {
 			
 			if($method === 'update'){
-				$user->userrole()->delete(); // first delete old values
+				$user->roleuser()->delete(); // first delete old values
 			}
 
 			try {

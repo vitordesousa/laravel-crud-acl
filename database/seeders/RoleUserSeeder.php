@@ -6,7 +6,7 @@ use App\Models\RoleUser;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
-class RoleUserSeed extends Seeder
+class RoleUserSeeder extends Seeder
 {
 	/**
 	 * Run the database seeds.

@@ -18,17 +18,18 @@ class Permission extends Model
 	 */
 	protected $fillable = [
 		'name',
-		'label'
+		'label',
+		'route'
 	];
 	
 
 	/* + relationships */
 	public function role()	{
-		return $this->belongsToMany(\App\Models\Role::class);
+		return $this->belongsToMany(\App\Models\Role::class, 'role_permissions');
 	}
 	
 	public function roleuser()	{
-		return $this->belongsToMany(\App\Models\RoleUser::class);
+		return $this->belongsToMany(\App\Models\RoleUser::class, 'role_users');
 	}
 
 	/* / relationships */

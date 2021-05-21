@@ -61,11 +61,11 @@ class User extends Authenticatable
 
 	/* + relationships */
 	public function role()	{
-		return $this->belongsToMany(\App\Models\Role::class);
+		return $this->belongsToMany(Role::class, 'role_users');
 	}
 
-	public function userrole()	{
-		return $this->HasMany(\App\Models\RoleUser::class);
+	public function roleuser()	{
+		return $this->HasMany(RoleUser::class);
 	}
 
 	/* / relationships */

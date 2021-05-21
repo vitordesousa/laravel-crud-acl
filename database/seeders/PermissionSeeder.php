@@ -22,6 +22,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 1,
 				'name' 			=> 'roles_index',
 				'label' 		=> 'View All Roles',
+				'route'			=> 'Roles',
 				'created_at' 	=> $now,
 			 	'updated_at' 	=> $now
 			],
@@ -29,6 +30,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 2,
 				'name' 			=> 'roles_create',
 				'label' 		=> 'Create Roles',
+				'route'			=> 'Roles',
 				'created_at' 	=> $now,
 			 	'updated_at' 	=> $now
 			],
@@ -36,6 +38,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 3,
 				'name' 			=> 'roles_edit',
 				'label' 		=> 'Edit Roles',
+				'route'			=> 'Roles',
 				'created_at'	=> $now,
 			 	'updated_at'	=> $now
 			],
@@ -43,6 +46,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 4,
 				'name' 			=> 'roles_delete',
 				'label' 		=> 'Delete Roles',
+				'route'			=> 'Roles',
 				'created_at' 	=> $now,
 			 	'updated_at' 	=> $now
 			],
@@ -51,6 +55,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 5,
 				'name'			=> 'permissions_index',
 				'label' 		=> 'View All Permissions',
+				'route'			=> 'Permissions',
 				'created_at' 	=> $now,
 			 	'updated_at' 	=> $now
 			],
@@ -58,6 +63,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 6,
 				'name' 			=> 'permissions_create',
 				'label' 		=> 'Create Permissions',
+				'route'			=> 'Permissions',
 				'created_at' 	=> $now,
 			 	'updated_at' 	=> $now
 			],
@@ -65,6 +71,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 7,
 				'name' 			=> 'permissions_edit',
 				'label' 		=> 'Edit Permissions',
+				'route'			=> 'Permissions',
 				'created_at' 	=> $now,
 			 	'updated_at' 	=> $now
 			],
@@ -72,6 +79,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 8,
 				'name' 			=> 'permissions_delete',
 				'label' 		=> 'Delete Permissions',
+				'route'			=> 'Permissions',
 				'created_at'	=> $now,
 			 	'updated_at' 	=> $now
 			],
@@ -80,6 +88,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 9,
 				'name'			=> 'users_index',
 				'label' 		=> 'View All Users',
+				'route'			=> 'Users',
 				'created_at' 	=> $now,
 			 	'updated_at' 	=> $now
 			],
@@ -87,6 +96,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 10,
 				'name' 			=> 'users_create',
 				'label' 		=> 'Create Users',
+				'route'			=> 'Users',
 				'created_at' 	=> $now,
 			 	'updated_at' 	=> $now
 			],
@@ -94,6 +104,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 11,
 				'name' 			=> 'users_edit',
 				'label' 		=> 'Edit Users',
+				'route'			=> 'Users',
 				'created_at' 	=> $now,
 			 	'updated_at' 	=> $now
 			],
@@ -101,6 +112,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 12,
 				'name' 			=> 'users_delete',
 				'label' 		=> 'Delete Users',
+				'route'			=> 'Users',
 				'created_at'	=> $now,
 			 	'updated_at' 	=> $now
 			],
@@ -109,6 +121,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 13,
 				'name'			=> 'posts_index',
 				'label' 		=> 'View All Posts',
+				'route'			=> 'Posts',
 				'created_at' 	=> $now,
 			 	'updated_at' 	=> $now
 			],
@@ -116,6 +129,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 14,
 				'name' 			=> 'posts_create',
 				'label' 		=> 'Create Posts',
+				'route'			=> 'Posts',
 				'created_at' 	=> $now,
 			 	'updated_at' 	=> $now
 			],
@@ -123,6 +137,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 15,
 				'name' 			=> 'posts_edit',
 				'label' 		=> 'Edit Posts',
+				'route'			=> 'Posts',
 				'created_at' 	=> $now,
 			 	'updated_at' 	=> $now
 			],
@@ -130,6 +145,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 16,
 				'name' 			=> 'posts_delete',
 				'label' 		=> 'Delete Posts',
+				'route'			=> 'Posts',
 				'created_at'	=> $now,
 			 	'updated_at' 	=> $now
 			],
@@ -137,6 +153,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 17,
 				'name' 			=> 'posts_own_edit',
 				'label' 		=> 'Edit Own Posts',
+				'route'			=> 'Posts',
 				'created_at'	=> $now,
 			 	'updated_at' 	=> $now
 			],
@@ -144,6 +161,7 @@ class PermissionSeeder extends Seeder
 				'id' 			=> 18,
 				'name' 			=> 'posts_show',
 				'label' 		=> 'View Posts',
+				'route'			=> 'Posts',
 				'created_at'	=> $now,
 			 	'updated_at' 	=> $now
 			],

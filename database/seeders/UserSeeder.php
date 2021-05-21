@@ -61,16 +61,16 @@ class UserSeeder extends Seeder
 			],
 			[
 				'id'			=>	6,
-				'name'			=>	'Editor 2',
-				'email'			=>	'editor2@example.com',
+				'name'			=>	'CopyWriter 2',
+				'email'			=>	'copyWriter2@example.com',
 				'password'		=>	bcrypt('password'),
 				'created_at'	=>	$now,
 			 	'updated_at' 	=>	$now
 			],
 			[
 				'id'			=>	7,
-				'name'			=>	'Editor 3',
-				'email'			=>	'editor3@example.com',
+				'name'			=>	'CopyWriter 3',
+				'email'			=>	'copyWriter3@example.com',
 				'password'		=>	bcrypt('password'),
 				'created_at'	=>	$now,
 			 	'updated_at' 	=>	$now
